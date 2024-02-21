@@ -7,7 +7,7 @@ import {
   CardTitle,
 } from './ui/card'
 import Messages from './utils/messages'
-import { AddWaterButton } from './AddWaterButton'
+import { AddWater } from './AddWater'
 import { useContext } from 'react'
 import { WaterConsumeContext } from '@/contexts/WaterConsume'
 
@@ -47,7 +47,7 @@ export function Resume() {
           }}
         ></div>
       </Card>
-      <AddWaterButton />
+      <AddWater />
     </div>
   )
 }
