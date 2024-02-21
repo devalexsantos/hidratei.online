@@ -11,27 +11,31 @@ import { useContext } from 'react'
 import { WaterConsumeContext } from '@/contexts/WaterConsume'
 import { ChangeGoal } from './ChangeGoal'
 import ClearConsume from './ClearConsume'
+import { Score } from './Score'
 
 export function Resume() {
   const { resume, percentConsumed } = useContext(WaterConsumeContext)
 
   function getWaveHeight(percent: number) {
-    if (percentConsumed > 100) return 400
-    return (percent * 400) / 100
+    if (percentConsumed > 100) return 450
+    return (percent * 450) / 100
   }
 
   const percent = Math.round(percentConsumed)
 
   return (
     <div className="relative">
-      <Card className="flex flex-col h-[400px] items-center justify-center relative overflow-hidden">
+      <Card className="flex flex-col h-[450px] items-center justify-center relative overflow-hidden">
         <CardHeader className="z-10">
-          <CardTitle className="text-center text-xl">Resumo Diário</CardTitle>
+          <CardTitle className="text-center text-xl mt-6">
+            Resumo Diário
+          </CardTitle>
           <CardDescription className="text-md z-20">
             <span className="text-primary flex items-center gap-2">
               Meta definida: <strong>{resume.goal / 1000} litro(s)</strong>
               <ChangeGoal />
             </span>
+            <Score />
             <ClearConsume />
           </CardDescription>
         </CardHeader>

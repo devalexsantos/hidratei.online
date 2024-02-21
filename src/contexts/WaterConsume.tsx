@@ -4,6 +4,8 @@ interface Resume {
   day: string
   goal: number
   consumed: number
+  score: number
+  reachedGoalToday: boolean
 }
 
 interface WaterConsumeContextData {
@@ -35,10 +37,24 @@ export function WaterConsumeContextProvider({
         parsedResumeDay.getFullYear() === date.getFullYear()
 
       if (!sameDay) {
+        const yesterday = new Date(date)
+        yesterday.setDate(date.getDate() - 1)
+
+        if (parsedResumeDay.getDate() === yesterday.getDate()) {
+          return {
+            day: date,
+            goal: parsedResume.goal,
+            consumed: 0,
+            score: parsedResume.score,
+            reachedGoalToday: false,
+          }
+        }
         return {
           day: date,
           goal: parsedResume.goal,
           consumed: 0,
+          score: 0,
+          reachedGoalToday: false,
         }
       } else {
         return parsedResume
@@ -48,11 +64,21 @@ export function WaterConsumeContextProvider({
       day: new Date(),
       goal: 2500,
       consumed: 0,
+      score: 0,
+      reachedGoalToday: false,
     }
   })
 
   useEffect(() => {
     localStorage.setItem('resume-mwater', JSON.stringify(resume))
+
+    if (resume.consumed >= resume.goal && !resume.reachedGoalToday) {
+      setResume((prevState) => ({
+        ...prevState,
+        score: prevState.score + 1,
+        reachedGoalToday: true,
+      }))
+    }
   }, [resume])
 
   function handleAddWater(amount: number) {
