@@ -8,14 +8,18 @@ import {
 } from './ui/card'
 import Messages from './utils/messages'
 import { AddWaterButton } from './AddWaterButton'
+import { useContext } from 'react'
+import { WaterConsumeContext } from '@/contexts/WaterConsume'
 
 export function Resume() {
-  const percentConsumed = 10
+  const { resume, percentConsumed } = useContext(WaterConsumeContext)
 
   function getWaveHeight(percent: number) {
     if (percentConsumed > 100) return 400
     return (percent * 400) / 100
   }
+
+  const percent = Math.round(percentConsumed)
 
   return (
     <div className="relative">
@@ -23,7 +27,7 @@ export function Resume() {
         <CardHeader className="z-10">
           <CardTitle className="text-center text-xl">Resumo Diário</CardTitle>
           <CardDescription>
-            Meta definida: 2,5 litros -{' '}
+            Meta definida: {resume.goal / 1000} litros -{' '}
             <span className="underline">alterar</span>
             <Settings className="absolute top-3 right-3" size={24} />
           </CardDescription>
@@ -33,7 +37,7 @@ export function Resume() {
             <Messages percentConsumed={percentConsumed} />
             <div className="w-[15px] h-[15px] bg-white absolute bottom-[-7px] left-[50%] rotate-45" />
           </div>
-          <span className="text-8xl font-bold">{percentConsumed}%</span>
+          <span className="text-8xl font-bold">{percent}%</span>
         </CardContent>
         <div
           className="z-0 wave bg-sky-300 dark:bg-sky-800 absolute bottom-0 left-0 border border-t-4 border-dotted"
