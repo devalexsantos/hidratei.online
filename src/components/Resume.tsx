@@ -27,7 +27,10 @@ export function Resume() {
         <CardHeader className="z-10">
           <CardTitle className="text-center text-xl">Resumo Diário</CardTitle>
           <CardDescription className="text-md">
-            Meta definida: <strong>{resume.goal / 1000} litros</strong>
+            Meta definida:{' '}
+            <strong className="text-primary">
+              {resume.goal / 1000} litros
+            </strong>
             <ChangeGoal />
           </CardDescription>
         </CardHeader>
