@@ -1,4 +1,3 @@
-import { Settings } from 'lucide-react'
 import {
   Card,
   CardContent,
@@ -10,6 +9,7 @@ import Messages from './utils/messages'
 import { AddWater } from './AddWater'
 import { useContext } from 'react'
 import { WaterConsumeContext } from '@/contexts/WaterConsume'
+import { ChangeGoal } from './ChangeGoal'
 
 export function Resume() {
   const { resume, percentConsumed } = useContext(WaterConsumeContext)
@@ -26,10 +26,9 @@ export function Resume() {
       <Card className="flex flex-col h-[400px] items-center justify-center relative overflow-hidden">
         <CardHeader className="z-10">
           <CardTitle className="text-center text-xl">Resumo Diário</CardTitle>
-          <CardDescription>
-            Meta definida: {resume.goal / 1000} litros -{' '}
-            <span className="underline">alterar</span>
-            <Settings className="absolute top-3 right-3" size={24} />
+          <CardDescription className="text-md">
+            Meta definida: <strong>{resume.goal / 1000} litros</strong>
+            <ChangeGoal />
           </CardDescription>
         </CardHeader>
         <CardContent className="z-10 flex-1 flex flex-col items-center justify-center">
@@ -37,7 +36,9 @@ export function Resume() {
             <Messages percentConsumed={percentConsumed} />
             <div className="w-[15px] h-[15px] bg-white absolute bottom-[-7px] left-[50%] rotate-45" />
           </div>
-          <span className="text-8xl font-bold">{percent}%</span>
+          <span className="text-8xl font-bold">
+            {percent <= 100 ? percent : '+100'}%
+          </span>
         </CardContent>
         <div
           className="z-0 wave bg-sky-300 dark:bg-sky-800 absolute bottom-0 left-0 border border-t-4 border-dotted"
