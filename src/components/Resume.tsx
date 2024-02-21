@@ -10,6 +10,7 @@ import { AddWater } from './AddWater'
 import { useContext } from 'react'
 import { WaterConsumeContext } from '@/contexts/WaterConsume'
 import { ChangeGoal } from './ChangeGoal'
+import ClearConsume from './ClearConsume'
 
 export function Resume() {
   const { resume, percentConsumed } = useContext(WaterConsumeContext)
@@ -26,12 +27,12 @@ export function Resume() {
       <Card className="flex flex-col h-[400px] items-center justify-center relative overflow-hidden">
         <CardHeader className="z-10">
           <CardTitle className="text-center text-xl">Resumo Diário</CardTitle>
-          <CardDescription className="text-md">
-            Meta definida:{' '}
-            <strong className="text-primary">
-              {resume.goal / 1000} litros
-            </strong>
-            <ChangeGoal />
+          <CardDescription className="text-md z-20">
+            <span className="text-primary flex items-center gap-2">
+              Meta definida: <strong>{resume.goal / 1000} litro(s)</strong>
+              <ChangeGoal />
+            </span>
+            <ClearConsume />
           </CardDescription>
         </CardHeader>
         <CardContent className="z-10 flex-1 flex flex-col items-center justify-center">
@@ -42,6 +43,11 @@ export function Resume() {
           <span className="text-8xl font-bold">
             {percent <= 100 ? percent : '+100'}%
           </span>
+          {resume.consumed > 0 && (
+            <span className="py-3 text-sm">
+              Você já consumiu: <strong>{resume.consumed}ml</strong> hoje.
+            </span>
+          )}
         </CardContent>
         <div
           className="z-0 wave bg-sky-300 dark:bg-sky-800 absolute bottom-0 left-0 border border-t-4 border-dotted"

@@ -11,6 +11,7 @@ interface WaterConsumeContextData {
   percentConsumed: number
   handleAddWater: (amount: number) => void
   handleEditGoal: (goal: number) => void
+  handleDeleteConsume: () => void
 }
 
 export const WaterConsumeContext = createContext({} as WaterConsumeContextData)
@@ -68,11 +69,24 @@ export function WaterConsumeContextProvider({
     }))
   }
 
+  function handleDeleteConsume() {
+    setResume((prevState) => ({
+      ...prevState,
+      consumed: 0,
+    }))
+  }
+
   const percentConsumed = (resume.consumed * 100) / resume.goal
 
   return (
     <WaterConsumeContext.Provider
-      value={{ resume, percentConsumed, handleAddWater, handleEditGoal }}
+      value={{
+        resume,
+        percentConsumed,
+        handleAddWater,
+        handleEditGoal,
+        handleDeleteConsume,
+      }}
     >
       {children}
     </WaterConsumeContext.Provider>

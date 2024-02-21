@@ -42,11 +42,10 @@ export function ChangeGoal() {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <div className="absolute top-3 right-3">
-        <DialogTrigger className="text-primary">
-          <Settings size={24} />
-        </DialogTrigger>
-      </div>
+      <DialogTrigger className="text-primary">
+        <Settings size={28} />
+      </DialogTrigger>
+
       <DialogContent>
         <DialogHeader>
           <DialogTitle className="text-xl text-center">
