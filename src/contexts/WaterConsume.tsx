@@ -40,7 +40,10 @@ export function WaterConsumeContextProvider({
         const yesterday = new Date(date)
         yesterday.setDate(date.getDate() - 1)
 
-        if (parsedResumeDay.getDate() === yesterday.getDate()) {
+        if (
+          parsedResumeDay.getDate() === yesterday.getDate() &&
+          parsedResume.reachedGoalToday
+        ) {
           return {
             day: date,
             goal: parsedResume.goal,
