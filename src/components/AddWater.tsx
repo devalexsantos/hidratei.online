@@ -45,7 +45,7 @@ export function AddWater() {
         <DialogTrigger asChild>
           <Button
             type="button"
-            className="flex items-center justify-center w-[100px] h-[100px] rounded-full"
+            className="flex items-center justify-center w-[100px] h-[100px] rounded-full bg-sky-700 hover:bg-sky-800 dark:bg-primary"
           >
             <Plus size={48} />
           </Button>

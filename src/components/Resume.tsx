@@ -12,6 +12,7 @@ import { WaterConsumeContext } from '@/contexts/WaterConsume'
 import { ChangeGoal } from './ChangeGoal'
 import ClearConsume from './ClearConsume'
 import { Score } from './Score'
+import ConfettiExplosion from 'react-confetti-explosion'
 
 export function Resume() {
   const { resume, percentConsumed } = useContext(WaterConsumeContext)
@@ -25,9 +26,10 @@ export function Resume() {
 
   return (
     <div className="relative">
+      {percent > 99 && <ConfettiExplosion />}
       <Card className="flex flex-col h-[450px] items-center justify-center relative overflow-hidden">
         <CardHeader className="z-10">
-          <CardTitle className="text-center text-xl mt-6">
+          <CardTitle className="text-center text-xl mt-6 text-sky-700 dark:text-primary">
             Resumo Diário
           </CardTitle>
           <CardDescription className="text-md z-20">
@@ -44,7 +46,7 @@ export function Resume() {
             <Messages percentConsumed={percentConsumed} />
             <div className="w-[15px] h-[15px] bg-white absolute bottom-[-7px] left-[50%] rotate-45" />
           </div>
-          <span className="text-8xl font-bold">
+          <span className="text-8xl font-bold text-sky-700 dark:text-primary">
             {percent <= 100 ? percent : '+100'}%
           </span>
           {resume.consumed > 0 && (
