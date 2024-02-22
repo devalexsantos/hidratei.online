@@ -2,7 +2,7 @@ import { Github } from 'lucide-react'
 
 export function Footer() {
   return (
-    <footer className="mt-20 containter flex flex-col justify-center items-center gap-3 p-8 text-muted-foreground md:flex-row">
+    <footer className="containter flex flex-col justify-center items-center gap-3 p-8 text-muted-foreground md:flex-row">
       <span>
         Feito com amor 🖤 por{' '}
         <a
