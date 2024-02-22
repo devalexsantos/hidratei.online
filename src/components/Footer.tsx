@@ -1,0 +1,31 @@
+import { Github } from 'lucide-react'
+
+export function Footer() {
+  return (
+    <footer className="mt-20 containter flex flex-col justify-center items-center gap-3 p-8 text-muted-foreground md:flex-row">
+      <span>
+        Feito com amor 🖤 por{' '}
+        <a
+          className="underline"
+          href="https://www.linkedin.com/in/devalexsantos/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Alex Santos
+        </a>
+        .
+      </span>
+      <span className="flex items-center gap-2">
+        <Github size={22} />
+        <a
+          className="hover:underline"
+          href="https://github.com/devalexsantos/hidratei.com"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Github do projeto.
+        </a>
+      </span>
+    </footer>
+  )
+}
