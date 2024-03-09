@@ -5,16 +5,16 @@ FROM node:lts-alpine AS builder
 WORKDIR /app
 
 # Copie os arquivos de configuração
-COPY package.json yarn.lock ./
+COPY package.json ./
 
 # Instale as dependências
-RUN yarn install --frozen-lockfile
+RUN npm install --frozen-lockfile
 
 # Copie todos os arquivos do projeto
 COPY . .
 
 # Construa o projeto Vite com TypeScript
-RUN yarn build
+RUN npm run build
 
 # Inicie uma nova fase
 FROM nginx:alpine
