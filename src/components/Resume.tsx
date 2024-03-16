@@ -15,7 +15,8 @@ import { Score } from './Score'
 import ConfettiExplosion from 'react-confetti-explosion'
 
 export function Resume() {
-  const { resume, percentConsumed } = useContext(WaterConsumeContext)
+  const { resume, percentConsumed, needToConsume } =
+    useContext(WaterConsumeContext)
 
   function getWaveHeight(percent: number) {
     if (percentConsumed > 100) return 450
@@ -46,13 +47,20 @@ export function Resume() {
             <Messages percentConsumed={percentConsumed} />
             <div className="w-[15px] h-[15px] bg-white absolute bottom-[-7px] left-[50%] rotate-45" />
           </div>
-          <span className="text-8xl font-bold text-sky-700 dark:text-primary">
+          <span className="text-8xl font-bold text-sky-700 dark:text-primary mt-[-20px]">
             {percent <= 100 ? percent : '+100'}%
           </span>
           {resume.consumed > 0 && (
-            <span className="py-3 text-sm">
-              Você já consumiu: <strong>{resume.consumed}ml</strong> hoje.
-            </span>
+            <div className="flex flex-col items-center">
+              <span className="py-3 text-sm mt-[-15px]">
+                Você já consumiu: <strong>{resume.consumed}ml</strong> hoje.
+              </span>
+              {needToConsume > 0 && (
+                <span className="mt-[-10px] text-red-400">
+                  Faltam {needToConsume}ml.
+                </span>
+              )}
+            </div>
           )}
         </CardContent>
         <div
