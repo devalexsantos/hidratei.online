@@ -12,6 +12,9 @@ interface WaterConsumeContextData {
   resume: Resume
   percentConsumed: number
   needToConsume: number
+  maxScore: {
+    maxScore: number
+  }
   handleAddWater: (amount: number) => void
   handleEditGoal: (goal: number) => void
   handleDeleteConsume: () => void
@@ -73,8 +76,21 @@ export function WaterConsumeContextProvider({
     }
   })
 
+  const [maxScore, setMaxScore] = useState(() => {
+    const maxScore = localStorage.getItem('max-score-mwater')
+
+    if (maxScore) {
+      return JSON.parse(maxScore)
+    }
+
+    return {
+      maxScore: 0,
+    }
+  })
+
   useEffect(() => {
     localStorage.setItem('resume-mwater', JSON.stringify(resume))
+    localStorage.setItem('max-score-mwater', JSON.stringify(maxScore))
 
     if (resume.consumed >= resume.goal && !resume.reachedGoalToday) {
       setResume((prevState) => ({
@@ -83,7 +99,15 @@ export function WaterConsumeContextProvider({
         reachedGoalToday: true,
       }))
     }
-  }, [resume])
+
+    if (resume.score > maxScore.maxScore) {
+      setMaxScore({ maxScore: resume.score })
+      localStorage.setItem(
+        'max-score-mwater',
+        JSON.stringify({ maxScore: resume.score }),
+      )
+    }
+  }, [resume, maxScore])
 
   function handleAddWater(amount: number) {
     setResume((prevState) => ({
@@ -119,6 +143,7 @@ export function WaterConsumeContextProvider({
         handleEditGoal,
         handleDeleteConsume,
         needToConsume,
+        maxScore,
       }}
     >
       {children}
